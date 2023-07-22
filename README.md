@@ -17,3 +17,8 @@ Program to create youtube video, upload to Youtube, upload files to google drive
 4. com.google.apis:google-api-services-youtube:v3-rev222-1.25.0
 5. com.google.apis:google-api-services-drive:v3-rev20230206-2.0.0
 6. https://github.com/calatonsystems/wc-api-java (included in project file)
+
+## Roadmap
+- Create User-Friendly Interface
+- Multithread Zip file creation
+- Provide further error checking and data validation
