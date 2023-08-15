@@ -31,10 +31,10 @@ Upload video, and thumbnail Files to Youtube through the Youtube API. Also
 
 Website Product | Youtube Video
 :-------------------------:|:-------------------------:
-[![website](https://github.com/h3music/iris-track-uploader/assets/22086435/2c425952-f246-4a1e-b7cf-00626e5c645f)](https://h3music.com/product/downsides/)  |  [![youtube](https://github.com/h3music/iris-track-uploader/assets/22086435/27855db3-16ee-4d51-a7c2-834becbc9683)](https://youtu.be/wr3tokbvArI)
+[![website](https://github-production-user-asset-6210df.s3.amazonaws.com/22086435/260809691-2c425952-f246-4a1e-b7cf-00626e5c645f.png)](https://h3music.com/product/downsides/)  |  [<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/22086435/260809675-27855db3-16ee-4d51-a7c2-834becbc9683.jpg" width="100%">](https://www.youtube.com/watch?v=wr3tokbvArI)
 
 ## Youtube Breakdown
-[![youtube](https://github.com/h3music/iris-track-uploader/assets/22086435/b89b7f50-182d-4827-8691-ae2245943d64)](https://youtu.be/DtZYZEKrGsw)
+[<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/22086435/260810511-b89b7f50-182d-4827-8691-ae2245943d64.jpg" width="50%">](https://www.youtube.com/watch?v=DtZYZEKrGsw)
 
 ## Dependencies
 1. FFMPEG (Built Using 2023-06-11-git-09621fd7d9-full_build- gyan.dev)
