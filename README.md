@@ -1,5 +1,9 @@
 # iris-track-uploader
-Program to create youtube video, upload to Youtube, upload files to google drive, and create website product.
+Program to create youtube video, upload to Youtube, upload files to google drive and S3, and create website product.
+
+## April 2024 Update
+- Fixed Drive Token Expiration Error, recursive call did not return correctly
+- Added Call to S3 Upload Script and the returned Url is used in the Website upload
 
 ## Program Workflow
 ![process](https://github.com/h3music/iris-track-uploader/assets/22086435/408bb0be-49f0-48c7-9edf-f9cbc8616e7c)
@@ -14,8 +18,8 @@ Further information is available on my [WavFile](https://github.com/aabalke33/wa
 ### Create Zip File
 Create zip from WAV trackouts through a standard implementation.
 
-### Upload to Drive
-Upload Mp3, Artwork, WAV, and Zip Files to Google Drive through the Google Drive API
+### Upload to Drive & S3
+Upload Mp3, Artwork, WAV, and Zip Files to Google Drive through the Google Drive API. Additionally uploads Mp3 to S3 using a custom Node package, connected through stdin and stdout.
 
 ### Create Website Product
 Create Website Product on Wordpress / Woocommerce using REST APIs.
