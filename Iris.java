@@ -60,12 +60,13 @@ public class Iris {
             // Create Zip
             Zip.create(csv.name(), csv.localMedia());
 
-            // Drive Upload
+            // Drive & S3 Upload
             DriveRecord driveIdRecord = Drive.upload(csv);
+            String s3Url = s3.s3Uploader.upload(csv.localMp3());
 
             // Website
             WebsiteRecord websiteRecord = WebsiteJson.createWebsiteRecord(csv, driveIdRecord, tempo);
-            Website.upload(websiteRecord);
+            Website.upload(websiteRecord, s3Url);
 
         } catch (Exception e) {
             e.printStackTrace();

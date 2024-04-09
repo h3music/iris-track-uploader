@@ -12,7 +12,7 @@ public class Website {
      * @param record record to provide parameters
      * @throws InterruptedException
      */
-    public static void upload(WebsiteRecord record) throws InterruptedException {
+    public static void upload(WebsiteRecord record, String s3Url) throws InterruptedException {
         progressBar.create("Uploading to h3music.com");
 
         String slug = record.name().replace(" ", "").toLowerCase();
@@ -28,7 +28,7 @@ public class Website {
         // Product Api Call
         Map<String, Object> productInfo = prepareProduct(record.name(),
                 record.date(), record.description(), categoryIds,
-                record.mp3Id());
+                record.mp3Id(), s3Url);
 
         Map product = wooCommerce.create(EndpointBaseType.PRODUCTS.getValue(), productInfo);
 
@@ -199,7 +199,7 @@ public class Website {
      * @return
      */
     private static Map<String, Object> prepareProduct(String name, String date, String description,
-                                                      ArrayList<Integer> categoryIds, String mp3Id) {
+                                                      ArrayList<Integer> categoryIds, String mp3Id, String s3Url) {
         // General Info
         Map<String, Object> productInfo = new HashMap<>();
         productInfo.put("name", name);
@@ -266,6 +266,10 @@ public class Website {
         Map<String, Object> metadata = new HashMap<>();
         metadata.put("key", "free_download");
         metadata.put("value", mp3Id);
+
+        Map<String, Object> s3metadata = new HashMap<>();
+        s3metadata.put("key", "s3_free_download");
+        s3metadata.put("value", s3Url);
 
         ArrayList<Map<String, Object>> metadataArray = new ArrayList<>();
         metadataArray.add(metadata);

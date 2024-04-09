@@ -26,30 +26,44 @@ public class Drive {
      * @throws GeneralSecurityException
      */
     public static DriveRecord upload(CsvRecord csvRecord) throws IOException, GeneralSecurityException {
+        try {
 
-        if (LocalDateTime.now().isAfter(LocalDateTime.of(2024,1,1,0,0))) {
-            System.out.println("Need new Google Folders");
-            System.exit(1);
+            if (LocalDateTime.now().isAfter(LocalDateTime.of(2024,1,1,0,0))) {
+                System.out.println("Need new Google Folders");
+                System.exit(1);
+            }
+
+            final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
+
+            com.google.api.services.drive.Drive service =
+                    new com.google.api.services.drive.Drive.Builder(
+                    Auth.HTTP_TRANSPORT, Auth.JSON_FACTORY, Auth.authorize(HTTP_TRANSPORT))
+                    .setApplicationName("drive")
+                    .build();
+
+            String ArtId = request(service, csvRecord.localProductImage(), ART_LOCATION);
+            System.out.println("Uploaded ART");
+            String Mp3Id = request(service, csvRecord.localMp3(), MP3_LOCATION);
+            System.out.println("Uploaded Mp3");
+            String WavId = request(service, csvRecord.localWav(), WAV_LOCATION);
+            System.out.println("Uploaded WAV");
+            String StemId = request(service, csvRecord.localStem(), STEM_LOCATION);
+            System.out.println("Uploaded STEM");
+
+            return new DriveRecord(Mp3Id, WavId, StemId, ArtId);
+
+        } catch (TokenResponseException tokenFail) {
+
+            System.out.println("Drive Token Expired");
+            java.io.File token = new java.io.File(Auth.TOKENS_DIRECTORY_PATH + "/StoredCredential");
+            token.delete();
+            System.out.println("Rerunning Drive Upload");
+            return upload(csvRecord);
+
+        } catch (IOException io) {
+            io.printStackTrace();
         }
-
-        final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
-
-        com.google.api.services.drive.Drive service =
-                new com.google.api.services.drive.Drive.Builder(
-                Auth.HTTP_TRANSPORT, Auth.JSON_FACTORY, Auth.authorize(HTTP_TRANSPORT))
-                .setApplicationName("drive")
-                .build();
-
-        String ArtId = request(service, csvRecord.localProductImage(), ART_LOCATION);
-        System.out.println("Uploaded ART");
-        String Mp3Id = request(service, csvRecord.localMp3(), MP3_LOCATION);
-        System.out.println("Uploaded Mp3");
-        String WavId = request(service, csvRecord.localWav(), WAV_LOCATION);
-        System.out.println("Uploaded WAV");
-        String StemId = request(service, csvRecord.localStem(), STEM_LOCATION);
-        System.out.println("Uploaded STEM");
-
-        return new DriveRecord(Mp3Id, WavId, StemId, ArtId);
+        return null;
     }
 
     /**
